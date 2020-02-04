@@ -4,7 +4,7 @@
 
 ```sh
 npm run ganache-start //ganache-cli develop
-npm run migrate //truffle migrate
+npm run migrate //truffle migrate --reset
 cd client
 npm start
 ```
