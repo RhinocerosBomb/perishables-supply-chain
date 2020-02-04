@@ -1,0 +1,26 @@
+{
+  "name": "perishables-supply-chain",
+  "version": "1.0.0",
+  "description": "perishables-supply-chain",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RhinocerosBomb/perishables-supply-chain.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RhinocerosBomb/perishables-supply-chain/issues"
+  },
+  "homepage": "https://github.com/RhinocerosBomb/perishables-supply-chain#readme"
+}
