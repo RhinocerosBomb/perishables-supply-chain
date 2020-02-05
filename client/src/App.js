@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { DrizzleProvider } from 'drizzle-react';
+
 
 function App() {
   return (
