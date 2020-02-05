@@ -1,10 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+
 import { DrizzleProvider } from 'drizzle-react';
 
 
+// import {abi, contractAddress, owner} from './contractConfigurations.json';
+
+
 function App() {
+  // console.log(abi, contractAddress, owner)
   return (
     <div className="App">
       <header className="App-header">
