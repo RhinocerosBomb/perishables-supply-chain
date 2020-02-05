@@ -5,7 +5,7 @@ module.exports = async function(deployer, network, accounts) {
   deployer.deploy(SupplyChainTracker).then(async() => {
       const fileContent = await require("../build/contracts/SupplyChainTracker.json");
       const contractConfiguration = {
-        abi: fileContent.abi,
+        contract: fileContent,
         contractAddress: SupplyChainTracker.address,
         owner: accounts[0]
     };
