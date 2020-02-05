@@ -2,14 +2,23 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { DrizzleProvider } from 'drizzle-react';
+import { DrizzleProvider } from 'drizzle-react'; 
 
 
-// import {abi, contractAddress, owner} from './contractConfigurations.json';
+import {abi, contractAddress, owner} from './contractConfigurations.json';
 
+
+
+const options = {
+  contracts: [
+    abi,
+    contractAddress,
+    owner
+  ]
+}
 
 function App() {
-  // console.log(abi, contractAddress, owner)
+  console.log(abi, contractAddress, owner)
   return (
     <div className="App">
       <header className="App-header">
