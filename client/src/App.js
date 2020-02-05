@@ -8,7 +8,7 @@ import { DrizzleProvider } from 'drizzle-react';
 import {abi, contractAddress, owner} from './contractConfigurations.json';
 
 
-
+  
 const options = {
   contracts: [
     abi,
@@ -25,7 +25,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
-        </p>
+        </p>  
         <a
           className="App-link"
           href="https://reactjs.org"
