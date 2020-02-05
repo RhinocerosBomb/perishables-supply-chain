@@ -10,7 +10,8 @@ contract SupplyChainTracker is Ownable {
     struct Note {
         uint16 locationId;
         uint32 timeStamp;
-        uint8 temperature; // For example: 0 == "Active", 1 == "expired", 2 == "IOT Malfunction"
+        uint8 condition; // For example: 0 == "Active", 1 == "expired", 2 == "IOT Malfunction"
+        uint8 temperature; 
     }
 
     uint256 private numOfItems;
@@ -32,29 +33,29 @@ contract SupplyChainTracker is Ownable {
         roles[roleId].remove(user);
     }
 
-    function startSupply(uint16 locationId, uint32 timeStamp, uint8 temperature) external {
-        addSupplyEntry(numOfItems, locationId, timeStamp, temperature);
+    function startSupply(uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external {
+        addSupplyEntry(numOfItems, locationId, timeStamp, temperature, condition);
         numOfItems = numOfItems.add(1);
     }
 
-    function appendSupply(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature) external {
+    function appendSupply(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external {
         require(hasItem(itemId), "Item does not exist");
-        addSupplyEntry(itemId, locationId, timeStamp, temperature);
+        addSupplyEntry(itemId, locationId, timeStamp, temperature, condition);
         stageOfItem[itemId] = stageOfItem[itemId].add(1);
     }
 
-    function addSupplyEntry(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature)
+    function addSupplyEntry(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition)
         internal isOwnerOrHasRole(locationIdToRole[locationId]) {
-            tracker[itemId][stageOfItem[itemId]] = Note(locationId, timeStamp, temperature);
+            tracker[itemId][stageOfItem[itemId]] = Note(locationId, timeStamp, temperature, condition);
     }
 
     function getSuppliesLatest() external view returns (bytes memory) {
         require(numOfItems > 0, "There are no items");
         Note memory tempNote = tracker[0][stageOfItem[0]];
-        bytes memory suppliesLatest = abi.encodePacked(tempNote.locationId, tempNote.timeStamp, tempNote.temperature);
+        bytes memory suppliesLatest = abi.encodePacked(tempNote.locationId, tempNote.timeStamp, tempNote.temperature, tempNote.condition);
         for (uint i = 1; i < numOfItems; i++) {
             tempNote = tracker[i][stageOfItem[i]];
-            suppliesLatest = abi.encodePacked(suppliesLatest, tempNote.locationId, tempNote.timeStamp, tempNote.temperature);
+            suppliesLatest = abi.encodePacked(suppliesLatest, tempNote.locationId, tempNote.timeStamp, tempNote.temperature, tempNote.condition);
         }
 
         return suppliesLatest;
@@ -63,10 +64,10 @@ contract SupplyChainTracker is Ownable {
     function getSupplyLogs(uint256 itemId) external view returns (bytes memory) {
         require(hasItem(itemId), "Item does not exist");
         Note memory tempNote = tracker[itemId][0];
-        bytes memory suppliesLatest = abi.encodePacked(tempNote.locationId, tempNote.timeStamp, tempNote.temperature);
+        bytes memory suppliesLatest = abi.encodePacked(tempNote.locationId, tempNote.timeStamp, tempNote.temperature, tempNote.condition);
         for (uint i = 1; i < stageOfItem[itemId]; i++) {
             tempNote = tracker[itemId][i];
-            suppliesLatest = abi.encodePacked(suppliesLatest, tempNote.locationId, tempNote.timeStamp, tempNote.temperature);
+            suppliesLatest = abi.encodePacked(suppliesLatest, tempNote.locationId, tempNote.timeStamp, tempNote.temperature, tempNote.condition);
         }
 
         return suppliesLatest;
