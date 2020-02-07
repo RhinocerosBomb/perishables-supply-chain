@@ -1,12 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { compose, withProps } from "recompose";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker
+} from "react-google-maps";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// Got API key with google cloud subcription.
+// This API key will only be limited to this repo. Forks wont work.
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const MyMapComponent = compose(
+  withProps({
+    googleMapURL:
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCwrqKeHb2B05R8lLbuqzM6mtqzLeD9s24&v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props => (
+  <GoogleMap defaultZoom={8} defaultCenter={{ lat: 43.65107, lng: -79.347015 }}>
+    {props.isMarkerShown && (
+      <Marker position={{ lat: 43.65107, lng: -79.347015 }} />
+    )}
+  </GoogleMap>
+));
+
+ReactDOM.render(
+  <MyMapComponent isMarkerShown />,
+  document.getElementById("root")
+);
