@@ -36,4 +36,4 @@ npm start
 
 ### Update: Demo 1.0
 
-![](link-to-image)
+![](https://github.com/RhinocerosBomb/perishables-supply-chain/blob/frontend/demo.png)
