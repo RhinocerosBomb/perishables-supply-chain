@@ -14,7 +14,7 @@ contract SupplyChainTracker is Ownable {
         uint8 temperature; 
     }
 
-    uint256 private numOfItems;
+    uint256 private numOfItems = 0;
     mapping(uint256 => mapping(uint256 => Note)) tracker; // itemId => stage => Note
     mapping(uint256 => uint256) stageOfItem; // Sequential Nonce
     mapping(uint256 => Roles.Role) locationIdToRole; // For example: 0 => brewery1, 1 => brewery2, 2 => retail1...
@@ -41,6 +41,7 @@ contract SupplyChainTracker is Ownable {
     function appendSupply(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external {
         require(hasItem(itemId), "Item does not exist");
         addSupplyEntry(itemId, locationId, timeStamp, temperature, condition);
+        numOfItems = numOfItems.add(1);
         stageOfItem[itemId] = stageOfItem[itemId].add(1);
     }
 
