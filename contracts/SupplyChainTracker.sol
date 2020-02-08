@@ -10,8 +10,8 @@ contract SupplyChainTracker is Ownable {
     struct Note {
         uint16 locationId;
         uint32 timeStamp;
-        uint8 condition;
-        uint8 temperature; // For example: 0 == "Active", 1 == "expired", 2 == "IOT Malfunction"
+        uint8 temperature;
+        uint8 condition; // For example: 0 == "Active", 1 == "expired", 2 == "IOT Malfunction"
     }
 
     uint256 private numOfItems;
@@ -33,16 +33,17 @@ contract SupplyChainTracker is Ownable {
         roles[roleId].remove(user);
     }
 
-    function startSupply(uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external {
+    function startSupply(uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external returns (uint256) {
         addSupplyEntry(numOfItems, locationId, timeStamp, temperature, condition);
+        uint256 itemId = numOfItems;
         numOfItems = numOfItems.add(1);
+        return itemId;
     }
 
     function appendSupply(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external {
         require(hasItem(itemId), "Item does not exist");
-        addSupplyEntry(itemId, locationId, timeStamp, temperature, condition);
-        numOfItems = numOfItems.add(1);
         stageOfItem[itemId] = stageOfItem[itemId].add(1);
+        addSupplyEntry(itemId, locationId, timeStamp, temperature, condition);
     }
 
     function addSupplyEntry(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition)
@@ -66,7 +67,7 @@ contract SupplyChainTracker is Ownable {
         require(hasItem(itemId), "Item does not exist");
         Note memory tempNote = tracker[itemId][0];
         bytes memory suppliesLatest = abi.encodePacked(tempNote.locationId, tempNote.timeStamp, tempNote.temperature, tempNote.condition);
-        for (uint i = 1; i < stageOfItem[itemId]; i++) {
+        for (uint i = 1; i <= stageOfItem[itemId]; i++) {
             tempNote = tracker[itemId][i];
             suppliesLatest = abi.encodePacked(suppliesLatest, tempNote.locationId, tempNote.timeStamp, tempNote.temperature, tempNote.condition);
         }
@@ -75,7 +76,7 @@ contract SupplyChainTracker is Ownable {
     }
 
     function hasItem(uint256 itemId) public view returns (bool) {
-        return itemId <= numOfItems;
+        return itemId < numOfItems;
     }
 
     function () external {

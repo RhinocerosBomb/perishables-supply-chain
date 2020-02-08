@@ -4,13 +4,13 @@ const bytesStringSplit = byteString => {
 }
 
 const byteStringSplitItem = (byteStrings, fields) => {
-  let start = 0
   const newByteStrings = byteStrings.map(byteString => {
+    let start = 0
     let item = {}
     Object.keys(fields).forEach((field, i) => {
       const index = fields[field]
       const bytes = byteString.substring(start, start + index)
-      start = index
+      start += index
       item[field] = '0x' + bytes
     })
     return item
