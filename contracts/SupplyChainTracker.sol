@@ -75,7 +75,7 @@ contract SupplyChainTracker is Ownable {
     }
 
     function hasItem(uint256 itemId) public view returns (bool) {
-        return itemId < numOfItems;
+        return itemId <= numOfItems;
     }
 
     function () external {
