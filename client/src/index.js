@@ -1,6 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import { Drizzle } from 'drizzle'
+import Web3 from 'web3'
+
+import SupplyChainTracker from './contracts/SupplyChainTracker.json'
+const options = {
+  web3: {
+    block: false,
+    customProvider: new Web3('ws://localhost:8545'),
+  },
+  contracts: [SupplyChainTracker],
+}
+
+const drizzle = new Drizzle(options)
+
 // import { compose, withProps } from "recompose";
 // import {
 //   withScriptjs,
@@ -30,7 +44,4 @@ import App from './App';
 //   </GoogleMap>
 // ));
 
-ReactDOM.render(
-  <App/>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App drizzle={drizzle} />, document.getElementById('root'))

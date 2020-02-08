@@ -1,73 +1,62 @@
-import React from "react";
+import React from 'react'
+import Table from 'react-bootstrap/Table'
 
-import Table from "react-bootstrap/Table";
+const locationLookup = {
+  '0x0000': "Jason's Brewery",
+  '0x0001': "Sakib's Warehouse",
+  '0x0002': "Kasra's BeerStore",
+}
 
-import { JwModal } from "./modal";
-
-
-function TableInfo(props) {
-  let showDetail = e => {
-    props.showDetails();
-  };
-
-  if (!props.show) {
-    return null;
+function TableInfo({ isDetails, show, showDetails, data, web3 }) {
+  if (!show) {
+    return null
   }
-  const elements = ["one", "two", "three", "four"];
-  const element2 = ["table1", "table2", "table3", "table4"];
+
   return (
     <Table striped bordered hover>
       <thead>
+        <h1>{isDetails && 'Kegs'}</h1>
         <tr>
-          <th>#</th>
+          {isDetails && <th>ID</th>}
+          {!isDetails && <th>stage</th>}
           <th>Location</th>
           <th>TimeStamp</th>
           <th>Temperature</th>
-          <th>Details</th>
+          <th>Condition</th>
+          {isDetails && <th>Details</th>}
+          {!isDetails && <th>Actions</th>}
         </tr>
       </thead>
 
-      {props.isDetails && (
-        <tbody>
-          {elements.map((value, index) => {
-            return (
-              <tr>
-                <td>{index}</td>
-                <td>{value}</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-
-                <td>
-                  <button className="detailsBtn" onClick={showDetail}>
-                    details
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      )}
-
-      {!props.isDetails && (
-        <tbody>
-          {element2.map((value, index) => {
-            return (
-              <tr>
-                <td>{index}</td>
-                <td>{value}</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-
-                <td>
-                  <button className="updateBtn">Update</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      )}
+      <tbody>
+        {data.map((fields, index) => (
+          <tr key={index}>
+            <td>{index}</td>
+            <td>{locationLookup[fields.locationId]}</td>
+            <td>
+              {new Date(
+                web3.utils.hexToNumber(fields.timeStamp) * 1000,
+              ).toUTCString()}
+            </td>
+            <td>{web3.utils.hexToNumber(fields.temperature) - 128}°</td>
+            <td>{fields.condition}</td>
+            {isDetails && (
+              <td>
+                <button className="detailsBtn" onClick={() => showDetails(index)}>
+                  details
+                </button>
+              </td>
+            )}
+            {!isDetails && (
+              <td>
+                <button className="updateBtn">Update</button>
+              </td>
+            )}
+          </tr>
+        ))}
+      </tbody>
     </Table>
-  );
+  )
 }
 
-export default TableInfo;
+export default TableInfo
