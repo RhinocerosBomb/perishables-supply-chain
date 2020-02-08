@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/**** add css ****/
+.detailsBtn{
+  background: #4687ff;
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 25px;
+  transition:all ease 0.5s;
+  text-transform: capitalize;
+}
+
+.detailsBtn:hover{
+  background:#ffffff;
+  color:#4687ff;
+}
+
+
+.updateBtn{
+  background: #2b9980;
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 25px;
+  transition:all ease 0.5s;
+  text-transform: capitalize;
+}

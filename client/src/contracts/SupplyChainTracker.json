@@ -9528,60 +9528,6 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {
-    "1580834239534": {
-      "events": {
-        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event",
-          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
-        }
-      },
-      "links": {},
-      "address": "0x06D60f1E0101b9bEC191577049B959457249F1B0",
-      "transactionHash": "0x2fd4e017c010bfe1d9d3baf4529f2b15f7dbf54727d0a75fc023dcf0d0f25975"
-    },
-    "1580934187847": {
-      "events": {
-        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event",
-          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
-        }
-      },
-      "links": {},
-      "address": "0xbA75C91e904F5009c66A9d582E99bE163a068C28",
-      "transactionHash": "0x70244c034088dc6996b167ee39877778e1bfeed534284a826a82ae6ee087e379"
-    },
     "1581120094001": {
       "events": {
         "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
@@ -9606,12 +9552,12 @@
         }
       },
       "links": {},
-      "address": "0x82cE160945B1D035e5B33699F4f6856973CEA8c1",
-      "transactionHash": "0xdd535eeba72861d27a9003a59892c9029993c17a1526c3f81f36f507a7f8e328"
+      "address": "0x5a3A40A272ac600EC6dD659E8dA4a12ca6c63467",
+      "transactionHash": "0x9637fe2c937a373fd6e157c07e672b4bbfb7e0ff7adda0bd7958995d709cef3c"
     }
   },
   "schemaVersion": "3.0.21",
-  "updatedAt": "2020-02-08T00:04:28.509Z",
+  "updatedAt": "2020-02-08T00:36:30.500Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

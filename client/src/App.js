@@ -3,38 +3,32 @@ import Web3 from 'web3'
 import logo from './logo.svg'
 import './App.css'
 
+import MainComponent from './MainComponent'
+
 import { DrizzleProvider } from 'drizzle-react'
 import { LoadingContainer } from 'drizzle-react-components'
 
-import { contract, contractAddress, owner } from './contractConfigurations.json'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+import SupplyChainTracker from './contracts/SupplyChainTracker.json'
+console.log(SupplyChainTracker);
 const options = {
   web3: {
     block: false,
     customProvider: new Web3('ws://localhost:8545'),
   },
-  contracts: [contract],
+  contracts: [SupplyChainTracker],
 }
+
 
 function App() {
   return (
     <DrizzleProvider options={options}>
       <LoadingContainer>
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+
+          <MainComponent></MainComponent>
+         
         </div>
       </LoadingContainer>
     </DrizzleProvider>
