@@ -40,6 +40,7 @@ contract SupplyChainTracker is Ownable {
     function appendSupply(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature) external {
         require(hasItem(itemId), "Item does not exist");
         addSupplyEntry(itemId, locationId, timeStamp, temperature);
+        numOfItems = numOfItems.add(1);
         stageOfItem[itemId] = stageOfItem[itemId].add(1);
     }
 
