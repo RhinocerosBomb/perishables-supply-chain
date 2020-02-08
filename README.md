@@ -54,8 +54,3 @@ For our public blockchain we will use a local development blockchain that can mi
    ```
   * "00000002" represents the timestamp in seconds. Therefore must multiply by 1000 to parse into a JS Date object.
   *"03" represents the temperature. To parse into celsius, convert from hex to decimals, then subtract by 128. This will give both positive and negatave temperatures.
-
-
-### Update: Demo 1.0
-
-![](https://github.com/RhinocerosBomb/perishables-supply-chain/blob/frontend/demo.png)
