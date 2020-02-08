@@ -9,6 +9,17 @@ import drizzle from "drizzle";
 
 function TableInfo(props) {
   console.log(props);
+
+  let showDetail = e => {
+    props.showDetails();
+    console.log("s");
+  };
+
+  if (!props.show) {
+    return null;
+  }
+  const elements = ['one', 'two', 'three','four'];
+  const element2 = ['table1', 'table2', 'table3','table4'];
   return (
     <Table striped bordered hover>
       <thead>
@@ -20,52 +31,48 @@ function TableInfo(props) {
           <th>Details</th>
         </tr>
       </thead>
-      <tbody>
 
+      {props.isDetails && (
+        <tbody>
 
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          {props.isDetails && (
-            <td>
-              <button className="detailsBtn" onClick={JwModal.open("modal-1")}>
-                details
-              </button>
-              <JwModal id="modal-1">
-                <h1>Detail</h1>
+{elements.map((value, index) => {
+        return  <tr>
+        <td>{index}</td>
+        <td>{value}</td>
+        <td>Otto</td>
+        <td>@mdo</td>
 
-                <button onClick={JwModal.close("modal-1")}>Close</button>
-              </JwModal>
-            </td>
-          )}
-          {!props.isDetails &&
-//something else
-<button className="updateBtn" onClick={JwModal.open("modal-1")}>
-Update
-</button>
-          }
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>
-            <button className="detailsBtn">details</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>
-            <button className="detailsBtn">details</button>
-          </td>
-        </tr>
-      </tbody>
+        <td>
+          <button className="detailsBtn" onClick={showDetail}>
+            details
+          </button>
+        </td>
+      </tr>
+      })}
+
+        </tbody>
+      )}
+
+      {!props.isDetails && (
+        
+        <tbody>
+
+{element2.map((value, index) => {
+        return <tr>
+        <td>{index}</td>
+        <td>{value}</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+
+        <td>
+          <button className="updateBtn">Update</button>
+        </td>
+      </tr>
+
+      })}
+
+        </tbody>
+      )}
     </Table>
   );
 }
