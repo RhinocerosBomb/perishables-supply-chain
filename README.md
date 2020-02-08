@@ -28,8 +28,7 @@ An ethereum public blockchain architecture means that the data and access to the
 Identify Dependencies:
 For our public blockchain we will use a local development blockchain that can mimic the behaviour of a public blockchain using Ganache for ethereum Development. This will allow us to deploy smart contracts, develop applications, and run tests on the network. 
 
-
-
+![](https://github.com/RhinocerosBomb/perishables-supply-chain/blob/picture/images/Screenshot%20from%202020-02-08%2012-37-58.png)
 
 ## notes
 * Due to solidity not being able to return complex dynamic data structures, the logs from the supply chain must by serialized. Therefore, in the dApp the data has to be deserialized to be able to be readable.
