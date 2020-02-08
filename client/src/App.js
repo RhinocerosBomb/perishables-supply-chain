@@ -2,11 +2,10 @@ import React from "react";
 import Web3 from "web3";
 import logo from "./logo.svg";
 import "./App.css";
-import {Drizzle} from "drizzle";
+import { Drizzle, generateStore } from "drizzle";
 import MainComponent from "./MainComponent";
 
-import { DrizzleProvider } from "drizzle-react";
-import { LoadingContainer } from "drizzle-react-components";
+import { DrizzleContext } from "drizzle-react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -19,18 +18,20 @@ const options = {
   contracts: [SupplyChainTracker]
 };
 
-const drizzle = new Drizzle(options);
+const drizzleStore = generateStore(options);
+
+const drizzle = new Drizzle(options, drizzleStore);
 
 function App() {
 
   return (
-    <DrizzleProvider options={options}>
-      <LoadingContainer>
+    <DrizzleContext.Provider drizzle={drizzle}>
         <div className="App">
-          <MainComponent drizzle={drizzle}/>
+          <DrizzleContext.Consumer>
+          <MainComponent/>
+          </DrizzleContext.Consumer>
         </div>
-      </LoadingContainer>
-    </DrizzleProvider>
+    </DrizzleContext.Provider>
   );
 }
 

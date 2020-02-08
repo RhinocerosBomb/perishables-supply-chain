@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TableInfo from "./TableInfo";
-import { drizzleConnect } from "drizzle-react";
+import { DrizzleContext } from "drizzle-react";
 
 function MainComponent(props) {
   const [showTable, setShowTable] = useState(false);
   const [latestSupplyKey, setLatestSupplyKey] = useState();
-
+  const drizzleContext = useContext(DrizzleContext)
+    console.log(drizzleContext)
   useEffect(() => {
-    if (props.drizzleStatus.initialized) {
-        console.log(props.drizzle)
-       const dataKey = props.drizzle.contracts.SupplyChainTracker.methods.getSuppliesLatest.cacheCall();
-        setLatestSupplyKey(dataKey);
-        console.log(dataKey)
+    //    const dataKey = props.drizzle.contracts.SupplyChainTracker.methods.getSuppliesLatest.call();
+    //     setLatestSupplyKey(dataKey);
+        // console.log(props)
       // return state.contracts.SupplyChainTracker.storedData[dataKey].value;
-    }
-  }, [props.drizzleStatus.initialized]);
-  console.log(props.SupplyChainTracker)
+  }, []);
+//   console.log(props.SupplyChainTracker)
   return (
     <div>
       <TableInfo isDetails show showDetails={() => setShowTable(true)} />
@@ -32,4 +30,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default drizzleConnect(MainComponent, mapStateToProps);
+export default MainComponent;
