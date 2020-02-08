@@ -33,9 +33,11 @@ contract SupplyChainTracker is Ownable {
         roles[roleId].remove(user);
     }
 
-    function startSupply(uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external {
+    function startSupply(uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external returns (uint256) {
         addSupplyEntry(numOfItems, locationId, timeStamp, temperature, condition);
+        uint256 itemId = numOfItems;
         numOfItems = numOfItems.add(1);
+        return itemId;
     }
 
     function appendSupply(uint256 itemId, uint16 locationId, uint32 timeStamp, uint8 temperature, uint8 condition) external {
@@ -75,7 +77,7 @@ contract SupplyChainTracker is Ownable {
     }
 
     function hasItem(uint256 itemId) public view returns (bool) {
-        return itemId <= numOfItems;
+        return itemId < numOfItems;
     }
 
     function () external {
